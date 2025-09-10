@@ -17,6 +17,8 @@ include: package:lints/recommended.yaml
 
 linter:
   rules:
+    prefer_relative_imports: true
+    prefer_single_quotes: true
     unawaited_futures: true
     avoid_print: true
 
@@ -24,6 +26,7 @@ analyzer:
   exclude:
     - lib/src/generated/**
     - test/integration/test_tools/serverpod_test_tools.dart
+      
 # For more information about the core and recommended set of lints, see
 # https://dart.dev/go/core-lints
 

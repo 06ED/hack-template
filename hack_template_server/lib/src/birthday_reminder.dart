@@ -1,5 +1,6 @@
-import 'package:hack_template_server/src/generated/protocol.dart';
 import 'package:serverpod/serverpod.dart';
+
+import 'generated/protocol.dart';
 
 /// This is a simple example of a future call that logs a birthday reminder.
 ///
