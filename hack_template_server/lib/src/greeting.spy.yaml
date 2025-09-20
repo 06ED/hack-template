@@ -1,6 +1,0 @@
-class: Greeting
-
-fields:
-  message: String
-  author: String
-  timestamp: DateTime
