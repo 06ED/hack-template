@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "hack_conn",
+            "username": "postgres",
+            "database": "hack_template_backend_dev"
+        }
+    ]
+}

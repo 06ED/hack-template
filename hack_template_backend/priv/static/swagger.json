@@ -1,0 +1,284 @@
+{
+  "securityDefinitions": {
+    "BearerAuth": {
+      "description": "Type \"Bearer\" followed by a space and JWT token.",
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "swagger": "2.0",
+  "paths": {
+    "/api/users/register": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "",
+        "responses": {
+          "201": {
+            "schema": {
+              "$ref": "#/definitions/CreateUserRs"
+            },
+            "examples": {
+              "application/json": {
+                "updated_at": "2017-02-12T13:45:23Z",
+                "inserted_at": "2017-02-08T12:34:55Z",
+                "id": 1,
+                "email": "example@mail.com"
+              }
+            },
+            "description": "User created"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "x-example": {
+              "password": "pass",
+              "email": "example@mail.com"
+            },
+            "schema": {
+              "$ref": "#/definitions/CreateUserRq"
+            },
+            "required": false,
+            "name": "user",
+            "in": "body",
+            "description": "The user details"
+          }
+        ],
+        "operationId": "HackTemplateBackendWeb.SessionController.register",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/api/users/refresh": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "",
+        "responses": {
+          "200": {
+            "schema": {
+              "type": "object",
+              "required": [
+                "access_token"
+              ],
+              "properties": {
+                "access_token": {
+                  "type": "string",
+                  "description": "User's access token"
+                }
+              }
+            },
+            "examples": {
+              "application/json": {
+                "access_token": "string"
+              }
+            },
+            "description": "User token refreshed"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "x-example": {
+              "refresh_token": "another string"
+            },
+            "schema": {
+              "type": "object",
+              "required": [
+                "refresh_token"
+              ],
+              "properties": {
+                "refresh_token": {
+                  "type": "string",
+                  "description": "User's refresh token"
+                }
+              }
+            },
+            "required": false,
+            "name": "user",
+            "in": "body",
+            "description": "User refresh token data"
+          }
+        ],
+        "operationId": "HackTemplateBackendWeb.SessionController.refresh",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ]
+      }
+    },
+    "/api/users/logout": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "",
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "User logouted"
+          }
+        },
+        "parameters": [],
+        "operationId": "HackTemplateBackendWeb.SessionController.logout",
+        "description": ""
+      }
+    },
+    "/api/users/login": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/LoginUserRs"
+            },
+            "examples": {
+              "application/json": {
+                "refresh_token": "another string",
+                "access_token": "string"
+              }
+            },
+            "description": "User logined"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "x-example": {
+              "password": "pass",
+              "email": "example@mail.com"
+            },
+            "schema": {
+              "$ref": "#/definitions/LoginUserRq"
+            },
+            "required": false,
+            "name": "user",
+            "in": "body",
+            "description": "The user details"
+          }
+        ],
+        "operationId": "HackTemplateBackendWeb.SessionController.login",
+        "description": "",
+        "consumes": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "CreateUserRs": {
+      "type": "object",
+      "title": "CreateUserRs",
+      "required": [
+        "updated_at",
+        "inserted_at",
+        "email",
+        "id"
+      ],
+      "properties": {
+        "updated_at": {
+          "type": "string",
+          "format": "datetime",
+          "description": "Update timestamp"
+        },
+        "inserted_at": {
+          "type": "string",
+          "format": "datetime",
+          "description": "Create timestamp"
+        },
+        "id": {
+          "type": "integer",
+          "description": "User id"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Email"
+        }
+      },
+      "description": "Response schema for created user"
+    },
+    "CreateUserRq": {
+      "type": "object",
+      "title": "CreateUserRq",
+      "required": [
+        "password",
+        "email"
+      ],
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "Password"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Email"
+        }
+      },
+      "description": "POST body for creating a user"
+    },
+    "LoginUserRs": {
+      "type": "object",
+      "title": "LoginUserRs",
+      "required": [
+        "refresh_token",
+        "access_token"
+      ],
+      "properties": {
+        "refresh_token": {
+          "type": "string",
+          "description": "Refresh token"
+        },
+        "access_token": {
+          "type": "string",
+          "description": "Access token"
+        }
+      },
+      "description": "Response schema for logined user"
+    },
+    "LoginUserRq": {
+      "type": "object",
+      "title": "LoginUserRq",
+      "required": [
+        "password",
+        "email"
+      ],
+      "properties": {
+        "password": {
+          "type": "string",
+          "description": "Password"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Email"
+        }
+      },
+      "description": "POST body for logining in"
+    }
+  },
+  "info": {
+    "title": "Hack Template app",
+    "version": "1.0"
+  }
+}
